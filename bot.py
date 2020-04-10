@@ -6,6 +6,7 @@ from discord.ext import commands
 
 extensions = ['cogs.base',
               'cogs.rank',
+             #  'cogs.guild',
               'cogs.owner',
               'cogs.misc']
 
@@ -48,3 +49,5 @@ else:
 
 
 bot.run(config["token"], bot=True, reconnect=True)
+# TODO: fail-safe bot token and guild id connection (delete config and try again if wrong token)
+# TODO: install discord.py thru PIP

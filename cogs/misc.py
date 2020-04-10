@@ -7,13 +7,19 @@ class MiscCog(commands.Cog):
         self.bot = bot
 
     @commands.command(name='uwu', aliases=['owo'])
-    async def uwu(self, ctx):
+    async def uwu(self, ctx, prompt: str):
         """
         Definitely wont explain this.
         :param ctx:
+        :param prompt: different texts
         :return:
         """
-        await ctx.send('Owo daddy what\'s that?')
+        text = None
+        if prompt == "goodnight" or prompt == "gn":
+            text = "Rawr xD goodnight OwO Hehe nuzzles"
+        else:
+            text = "Owo what's this?"
+        await ctx.send(str(text))
 
 
 def setup(bot):

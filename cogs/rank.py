@@ -39,7 +39,6 @@ class RankCog(commands.Cog):
         self.ranks = {}
         if os.path.exists("ranks.grlk"):
             self.ranks = pickle.load(open("ranks.grlk", "rb"))
-            print(self.ranks)
         else:
             pickle.dump(self.ranks, file=open("ranks.grlk", "wb"))
 
