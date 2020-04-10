@@ -46,7 +46,7 @@
 
 With my private Discord server slowly rising in members count, I had to face the cold hard truth...\
 Something was still missing...
-So I made this bot to fill the metaphorical hole both in the server and in my heart.
+So I made this bot to fill both metaphorical holes in the server and in my heart.
 
 Implemented features:
  * Custom role name and color
