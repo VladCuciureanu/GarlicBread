@@ -76,18 +76,26 @@ class RankCog(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
-    async def role_name(self, ctx, role_name: str):
+    async def role_name(self, ctx, *args):
         """
         Renames personal role to given name.
         :param ctx: Context, command context.
-        :param role_name: str, given role name.
+        :param args: array of words.
         :return: -
         """
         guild = await self.bot.fetch_guild(ctx.guild.id)
         author = str(ctx.message.author.id)
 
+        if len(args) == 0:
+            raise ValueError("Must provide a role name.")
+
+        role_name = ""
+        for word in args:
+            role_name += str(word)
+            role_name += " "
+
         if author not in self.ranks:
-            role = await guild.create_role(name=author, mentionable=False, reason="Role")
+            role = await guild.create_role(name=role_name, mentionable=False, reason="Role")
             self.ranks[author] = role.id
             pickle.dump(self.ranks, file=open("ranks.grlk", "wb"))
             await ctx.message.author.add_roles(role)
