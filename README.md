@@ -76,17 +76,21 @@ To get a local copy up and running follow these simple steps.
 ```sh
 git clone https://github.com/VladCuciureanu/garlic-bread.git && cd garlic-bread
 ```
-2. Run bot.py
+2. Install requirements
+```sh
+pip3 install -r requirements.txt
+```
+3. Run bot.py
 ```sh
 python3 bot.py
 ```
-3. Follow the setup wizard
+4. Follow the setup wizard
 ```
 Just input the requested info such as the bot token provided by the Discord dev platform.
 Bot Token: {Insert your Bot Token here}
 Guild ID: {Insert your server's ID here}
 ```
-4. If all went well you should see something like this:
+5. If all went well you should see something like this:
 ```
 Logged in as: {Your Bot's Nickname} - {Your Bot's UID}
 Version: {Some version}
