@@ -56,7 +56,6 @@ Implemented features:
 
 Planned features:
  * Guilds (custom visible role name for >2 players at all times)
- * Local DB integration
 
 ### Built With
 
