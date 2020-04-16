@@ -95,7 +95,20 @@ class OwnerCog(commands.Cog):
         channel = ctx.message.channel
         async for message in channel.history(limit=count):
             await message.delete()
-
+    
+    @commands.command(hidden=True)
+    @commands.is_owner()
+    async def host_type(self, ctx):
+        """
+        Displays whether or not the bot is hosted locally.
+        :param ctx: Context, command context.
+        :return: -
+        """
+        if "TOKEN" in os.environ:
+            await ctx.send("No. Currently hosted on Heroku!")
+        else:
+            await ctx.send("I'm being hosted locally.")
+    
     @commands.command(hidden=True)
     @commands.is_owner()
     @commands.guild_only()
