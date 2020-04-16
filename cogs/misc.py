@@ -19,6 +19,8 @@ class MiscCog(commands.Cog):
             text = "Rawr xD goodnight OwO Hehe nuzzles"
         elif prompt == "goodmorning" or prompt == "gm":
             text = "Owo good mowning xP"
+        elif prompt == "sad":
+            text = "\*sad uwu noises\*"
         else:
             text = "Owo what's this?"
         await ctx.send(str(text))

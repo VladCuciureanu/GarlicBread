@@ -35,14 +35,6 @@ async def on_command_error(ctx, error):
 
 @bot.event
 async def on_ready():
-    # Check if given guild id is valid
-    try:
-        await bot.fetch_guild(config["guild"])
-    except discord.errors.Forbidden:
-        print("Bot doesn't belong to a guild with given ID!")
-        os.remove("config.grlk")
-        exit()
-    
     print(f'\n\nLogged in as: {bot.user.name} - {bot.user.id}\nVersion: {discord.__version__}\n')
     print(f'Successfully logged in and booted...!')
 
@@ -51,8 +43,10 @@ async def on_ready():
 if os.path.exists("config.grlk"):
     config = pickle.load(open("config.grlk", "rb"))
 else:
-    config["token"] = str(input("Bot Token: "))
-    config["guild"] = int(input("Guild ID: "))
+    if "TOKEN" in os.environ:
+        config["token"] = str(os.environ["TOKEN"])
+    else:
+        config["token"] = str(input("Bot Token: "))
     pickle.dump(config, file=open("config.grlk", "wb"))
 
 
