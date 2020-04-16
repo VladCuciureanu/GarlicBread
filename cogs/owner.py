@@ -105,7 +105,7 @@ class OwnerCog(commands.Cog):
         :return: -
         """
         if "TOKEN" in os.environ:
-            await ctx.send("No. Currently hosted on Heroku!")
+            await ctx.send("Currently being hosted on Heroku!")
         else:
             await ctx.send("I'm being hosted locally.")
     
