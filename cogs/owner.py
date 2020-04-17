@@ -77,11 +77,13 @@ class OwnerCog(commands.Cog):
                     print("Deleted!")
                     deleted_counter += 1
             if deleted_counter > 0:
-                await ctx.send("Deleted " + str(deleted_counter) + "roles successfully!")
+                await ctx.send("Deleted " + str(deleted_counter) + " roles successfully!")
             else:
                 await ctx.send("There's no roles to delete!")
         except Exception as e:
             print(e)
+        os.remove("roles.grlk")
+        pickle.dump({}, file=open("roles.grlk", "wb"))
 
     @commands.command(hidden=True)
     @commands.is_owner()

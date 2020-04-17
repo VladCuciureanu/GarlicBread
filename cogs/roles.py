@@ -63,11 +63,12 @@ class RolesCog(commands.Cog):
             color_obj = discord.Colour.from_rgb(rgb[0], rgb[1], rgb[2])
         else:
             raise ValueError("Invalid number of arguments.")
-
+        
+        self.roles = pickle.load(open("roles.grlk", "rb"))
         if str(ctx.guild.id) not in self.roles:
             self.roles[str(ctx.guild.id)] = {}
 
-        if author not in self.roles:
+        if author not in self.roles[str(ctx.guild.id)]:
             role = await guild.create_role(name=author, color=color_obj, mentionable=False, reason="Color")
             self.roles[str(ctx.guild.id)][author] = role.id
             pickle.dump(self.roles, file=open("roles.grlk", "wb"))
@@ -95,11 +96,12 @@ class RolesCog(commands.Cog):
         for word in args:
             role_name += str(word)
             role_name += " "
-
+        
+        self.roles = pickle.load(open("roles.grlk", "rb"))
         if str(ctx.guild.id) not in self.roles:
             self.roles[str(ctx.guild.id)] = {}
 
-        if author not in self.roles:
+        if author not in self.roles[str(ctx.guild.id)]:
             role = await guild.create_role(name=role_name, mentionable=False, reason="Role")
             self.roles[str(ctx.guild.id)][author] = role.id
             pickle.dump(self.roles, file=open("roles.grlk", "wb"))
