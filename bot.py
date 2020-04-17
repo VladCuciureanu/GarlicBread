@@ -3,24 +3,22 @@ import pickle
 import discord
 from discord.ext import commands
 
-
 extensions = ['cogs.base',
-              'cogs.rank',
-             #  'cogs.guild',
+              'cogs.roles',
+              #  'cogs.guild',
               'cogs.owner',
               'cogs.misc']
 
 
 def get_prefix(bot_obj, message):
-    prefixes = ['>', '!']
+    prefixes = ['>']
     if not message.guild:
         return '?'
     return commands.when_mentioned_or(*prefixes)(bot_obj, message)
 
 
-bot = commands.Bot(command_prefix=get_prefix, description='O w O')
+bot = commands.Bot(command_prefix=get_prefix, description='Fresh out of the oven.')
 config = {}
-
 
 if __name__ == '__main__':
     for ext in extensions:
@@ -30,7 +28,11 @@ if __name__ == '__main__':
 @bot.event
 async def on_command_error(ctx, error):
     if type(error) == discord.ext.commands.errors.CommandNotFound:
-        await ctx.send("Owo daddy what's this command? \\*confused noises\\*")
+        await ctx.send("Owo what's this command? \\*confused noises\\*")
+    elif type(error) == discord.ext.commands.errors.CheckFailure:
+        await ctx.send("TwT sowwy but u can't wun this command xP")
+    else:
+        print(error)
 
 
 @bot.event
@@ -39,16 +41,22 @@ async def on_ready():
     print(f'Successfully logged in and booted...!')
 
 
-# Driver Code
+# Driver Code #
+
+# Checking if a config already exists
 if os.path.exists("config.grlk"):
+    # Loading existing config
     config = pickle.load(open("config.grlk", "rb"))
 else:
+    # Need this check for Heroku
     if "TOKEN" in os.environ:
+        # Get bot token from env var
         config["token"] = str(os.environ["TOKEN"])
     else:
+        # Get bot token from keyboard input
         config["token"] = str(input("Bot Token: "))
+    # Dump config to file
     pickle.dump(config, file=open("config.grlk", "wb"))
-
 
 try:
     bot.run(config["token"], bot=True, reconnect=True)

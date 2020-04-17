@@ -2,3 +2,4 @@
 *.grlk
 cogs/__pycache__
 .vscode
+bot-debug.py

@@ -33,14 +33,14 @@ def rgb_to_color(r, g, b):
     return discord.Colour.from_rgb(r, g, b)
 
 
-class RankCog(commands.Cog):
+class RolesCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.ranks = {}
-        if os.path.exists("ranks.grlk"):
-            self.ranks = pickle.load(open("ranks.grlk", "rb"))
+        self.roles = {}
+        if os.path.exists("roles.grlk"):
+            self.roles = pickle.load(open("roles.grlk", "rb"))
         else:
-            pickle.dump(self.ranks, file=open("ranks.grlk", "wb"))
+            pickle.dump(self.roles, file=open("roles.grlk", "wb"))
 
     @commands.command()
     @commands.guild_only()
@@ -64,13 +64,16 @@ class RankCog(commands.Cog):
         else:
             raise ValueError("Invalid number of arguments.")
 
-        if author not in self.ranks:
+        if str(ctx.guild.id) not in self.roles:
+            self.roles[str(ctx.guild.id)] = {}
+
+        if author not in self.roles:
             role = await guild.create_role(name=author, color=color_obj, mentionable=False, reason="Color")
-            self.ranks[author] = role.id
-            pickle.dump(self.ranks, file=open("ranks.grlk", "wb"))
+            self.roles[str(ctx.guild.id)][author] = role.id
+            pickle.dump(self.roles, file=open("roles.grlk", "wb"))
             await ctx.message.author.add_roles(role)
         else:
-            role = guild.get_role(self.ranks[author])
+            role = guild.get_role(self.roles[str(ctx.guild.id)][author])
             await role.edit(color=color_obj)
 
     @commands.command()
@@ -93,15 +96,18 @@ class RankCog(commands.Cog):
             role_name += str(word)
             role_name += " "
 
-        if author not in self.ranks:
+        if str(ctx.guild.id) not in self.roles:
+            self.roles[str(ctx.guild.id)] = {}
+
+        if author not in self.roles:
             role = await guild.create_role(name=role_name, mentionable=False, reason="Role")
-            self.ranks[author] = role.id
-            pickle.dump(self.ranks, file=open("ranks.grlk", "wb"))
+            self.roles[str(ctx.guild.id)][author] = role.id
+            pickle.dump(self.roles, file=open("roles.grlk", "wb"))
             await ctx.message.author.add_roles(role)
         else:
-            role = guild.get_role(self.ranks[author])
+            role = guild.get_role(self.roles[str(ctx.guild.id)][author])
             await role.edit(name=role_name)
 
 
 def setup(bot):
-    bot.add_cog(RankCog(bot))
+    bot.add_cog(RolesCog(bot))

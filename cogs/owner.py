@@ -61,12 +61,12 @@ class OwnerCog(commands.Cog):
     @commands.guild_only()
     async def purge_roles(self, ctx):
         """
-        Removes all roles from guild.
+        Resets roles. Shouldn't be used. Deletes ALL roles.
         :param ctx: Context, command context.
         :return: -
         """
         deleted_counter = 0
-        guild = await self.bot.fetch_guild(ctx.guild)
+        guild = await self.bot.fetch_guild(ctx.guild.id)
         role_list = guild.roles
         try:
             for role in role_list:
@@ -113,15 +113,25 @@ class OwnerCog(commands.Cog):
     @commands.is_owner()
     @commands.guild_only()
     async def save_roles(self, ctx):
-        ranks = {}
-
+        roles = {}
+        if os.path.exists("roles.grlk"):
+            roles = pickle.load(open("roles.grlk", "rb"))
+        else:
+            pickle.dump(roles, file=open("roles.grlk", "wb"))
+            
         guild = ctx.guild
+        
+        if str(ctx.guild.id) not in roles:
+            roles[str(ctx.guild.id)] = {}
+        
         async for member in guild.fetch_members():
-            roles = member.roles
-            if len(roles) > 1:
-                ranks[str(member.id)] = roles[1].id
-        print(ranks)
-        pickle.dump(ranks, file=open("ranks.grlk", "wb"))
+            if member.id != self.bot.user.id:
+                member_roles = member.roles
+                if len(member_roles) > 1:
+                    roles[str(ctx.guild.id)][str(member.id)] = member_roles[1].id
+        
+        pickle.dump(roles, file=open("roles.grlk", "wb"))
+        await ctx.send("Saved roles successfully!")
 
 
 def setup(bot):

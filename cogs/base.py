@@ -10,7 +10,7 @@ class BaseCog(commands.Cog):
     @commands.guild_only()
     async def joined(self, ctx, *, member: discord.Member = None):
         """
-        Displays when a member joined the server.
+        Displays when a given member joined the server.
         :param ctx: Context, command context.
         :param member: discord.Member, given member.
         :return: -
@@ -26,7 +26,7 @@ class BaseCog(commands.Cog):
         :param ctx: Context, command context.
         :return: -
         """
-        await ctx.send('Pong.')
+        await ctx.send('Pong >w<')
 
     @commands.command(name='perms', aliases=['permissions'])
     @commands.guild_only()
