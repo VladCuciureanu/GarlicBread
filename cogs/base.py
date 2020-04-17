@@ -1,3 +1,4 @@
+import json
 import discord
 from discord.ext import commands
 
@@ -28,22 +29,18 @@ class BaseCog(commands.Cog):
         """
         await ctx.send('Pong >w<')
 
-    @commands.command(name='perms', aliases=['permissions'])
-    @commands.guild_only()
-    async def check_permissions(self, ctx, *, member: discord.Member = None):
+    @commands.command()
+    async def help(self, ctx):
         """
-        Displays the perms of a given member. If no member given, displays perms of author.
+        Displays Garlic Bread's help doc.
         :param ctx: Context, command context.
-        :param member: discord.Member, given member.
         :return: -
         """
-        if not member:
-            member = ctx.author
-        perms = '\n'.join(perm for perm, value in member.guild_permissions if value)
-        embed = discord.Embed(title='Permissions for:', description=ctx.guild.name, colour=member.colour)
-        embed.set_author(icon_url=member.avatar_url, name=str(member))
-        embed.add_field(name='\uFEFF', value=perms)
-        await ctx.send(content=None, embed=embed)
+        with open("help_embed.json") as json_file:
+            embed_json = json.load(json_file)
+            for embed in embed_json["embeds"]:
+                embed_msg = discord.Embed.from_dict(embed)
+                await ctx.message.author.send(embed=embed_msg)
 
 
 def setup(bot):

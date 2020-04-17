@@ -1,0 +1,54 @@
+{
+   "embeds":[
+      {
+         "title":"__**Garlic-flavoured commands**__",
+         "description":"\nThese are a few of the commands that Garlic Bread has to offer. Please do remember that with great power comes great responsibility. Therefore, please __do not abuse__ these *very* *OP* commands of __**mass-destruction**__.",
+         "color":7028223
+      },
+      {
+         "title":"Owo",
+         "description":"This bot's most powerful command by far.",
+         "color":16738665,
+         "fields":[
+            {
+               "name":"**Syntax**",
+               "value":"> >uwu ***{prompt id}***\n... or ...\n> >owo ***{prompt id}***\n\n*Note that the prompt id is optional and the default prompt will be sent if no id will be provided.*\n"
+            }
+         ]
+      },
+      {
+         "title":"Roles",
+         "description":"In order to make the Discord experience richer without giving players administrative permissions, this bot gives every use the ability to have a role color and role name of choosing.",
+         "color":16772713,
+         "fields":[
+            {
+               "name":"**Role Name**",
+               "value":"> >role_name ***{role name}***"
+            },
+            {
+               "name":"**Role Color**",
+               "value":"> >role_color ***#{HEXCODE}***\n... or ...\n> >role_color ***R G B***"
+            }
+         ]
+      },
+      {
+         "title":"Guilds",
+         "description":"TBA",
+         "color":6920703
+      },
+      {
+         "title":"Misc",
+         "color":11233791,
+         "fields":[
+            {
+               "name":"**Join Date**",
+               "value":"> >joined ***@{member}***"
+            },
+            {
+               "name":"**Check if bot works**",
+               "value":"> >ping"
+            }
+         ]
+      }
+   ]
+}

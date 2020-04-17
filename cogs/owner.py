@@ -1,3 +1,4 @@
+import discord
 from discord.ext import commands
 import os
 import pickle
@@ -132,6 +133,24 @@ class OwnerCog(commands.Cog):
         
         pickle.dump(roles, file=open("roles.grlk", "wb"))
         await ctx.send("Saved roles successfully!")
+
+    @commands.command(name='perms', aliases=['permissions'])
+    @commands.guild_only()
+    @commands.is_owner()
+    async def check_permissions(self, ctx, *, member: discord.Member = None):
+        """
+        Displays the perms of a given member. If no member given, displays perms of author.
+        :param ctx: Context, command context.
+        :param member: discord.Member, given member.
+        :return: -
+        """
+        if not member:
+            member = ctx.author
+        perms = '\n'.join(perm for perm, value in member.guild_permissions if value)
+        embed = discord.Embed(title='Permissions for:', description=ctx.guild.name, colour=member.colour)
+        embed.set_author(icon_url=member.avatar_url, name=str(member))
+        embed.add_field(name='\uFEFF', value=perms)
+        await ctx.send(content=None, embed=embed)
 
 
 def setup(bot):

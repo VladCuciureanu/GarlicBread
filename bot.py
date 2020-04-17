@@ -20,6 +20,8 @@ def get_prefix(bot_obj, message):
 bot = commands.Bot(command_prefix=get_prefix, description='Fresh out of the oven.')
 config = {}
 
+bot.remove_command("help")
+
 if __name__ == '__main__':
     for ext in extensions:
         bot.load_extension(ext)
@@ -41,7 +43,7 @@ async def on_ready():
     print(f'Successfully logged in and booted...!')
 
 
-# Driver Code #
+# Driver Code
 
 # Checking if a config already exists
 if os.path.exists("config.grlk"):
