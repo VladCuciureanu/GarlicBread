@@ -41,6 +41,7 @@ class BaseCog(commands.Cog):
             for embed in embed_json["embeds"]:
                 embed_msg = discord.Embed.from_dict(embed)
                 await ctx.message.author.send(embed=embed_msg)
+        await ctx.send('Sent help in DMs ^w*')
 
 
 def setup(bot):
