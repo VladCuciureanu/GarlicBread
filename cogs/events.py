@@ -21,7 +21,8 @@ class EventsCog(commands.Cog):
         Command exceptions handling.
         """
         if type(error) == discord.ext.commands.errors.CommandNotFound:
-            await ctx.send("Owo what's this command? \\*confused noises\\*")
+            if ctx.message.content[1].isalpha():
+                await ctx.send("Owo what's this command? \\*confused noises\\*")
         elif type(error) == discord.ext.commands.errors.CheckFailure:
             await ctx.send("TwT sowwy but u can't wun this command xP")
         else:
