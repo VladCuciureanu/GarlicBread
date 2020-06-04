@@ -12,10 +12,8 @@ class OwnerCog(commands.Cog):
     @commands.is_owner()
     async def module_load(self, ctx, *, cog: str):
         """
-        Unloads a module.
-        :param ctx: Context, command context.
+        Loads a module.
         :param cog: str, module name.
-        :return:
         """
         try:
             self.bot.load_extension(cog)
@@ -29,9 +27,7 @@ class OwnerCog(commands.Cog):
     async def module_unload(self, ctx, *, cog: str):
         """
         Unloads a module.
-        :param ctx: Context, command context.
         :param cog: str, module name.
-        :return:
         """
         try:
             self.bot.unload_extension(cog)
@@ -45,9 +41,7 @@ class OwnerCog(commands.Cog):
     async def module_reload(self, ctx, *, cog: str):
         """
         Reloads a module.
-        :param ctx: Context, command context.
         :param cog: str, module name.
-        :return:
         """
         try:
             self.bot.unload_extension(cog)
@@ -63,8 +57,6 @@ class OwnerCog(commands.Cog):
     async def purge_roles(self, ctx):
         """
         Resets roles. Shouldn't be used. Deletes ALL roles.
-        :param ctx: Context, command context.
-        :return: -
         """
         deleted_counter = 0
         guild = await self.bot.fetch_guild(ctx.guild.id)
@@ -91,9 +83,7 @@ class OwnerCog(commands.Cog):
     async def purge_messages(self, ctx, *, count: int):
         """
         Deletes a given number of messages in chronological order.
-        :param ctx: Context, command context.
         :param count: int, number of messages to delete.
-        :return: -
         """
         channel = ctx.message.channel
         async for message in channel.history(limit=count):
@@ -104,8 +94,6 @@ class OwnerCog(commands.Cog):
     async def host_type(self, ctx):
         """
         Displays whether or not the bot is hosted locally.
-        :param ctx: Context, command context.
-        :return: -
         """
         if "TOKEN" in os.environ:
             await ctx.send("Currently being hosted on Heroku!")
@@ -142,9 +130,7 @@ class OwnerCog(commands.Cog):
     async def check_permissions(self, ctx, *, member: discord.Member = None):
         """
         Displays the perms of a given member. If no member given, displays perms of author.
-        :param ctx: Context, command context.
         :param member: discord.Member, given member.
-        :return: -
         """
         if not member:
             member = ctx.author

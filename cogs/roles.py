@@ -47,9 +47,6 @@ class RolesCog(commands.Cog):
     async def role_color(self, ctx, *args):
         """
         Color command. Gives anyone the desired role color.
-        :param ctx: Context, command context.
-        :param args: array of arguments from command
-        :return: -
         """
         guild = await self.bot.fetch_guild(ctx.guild.id)
         author = str(ctx.message.author.id)
@@ -82,9 +79,6 @@ class RolesCog(commands.Cog):
     async def role_name(self, ctx, *args):
         """
         Renames personal role to given name.
-        :param ctx: Context, command context.
-        :param args: array of words.
-        :return: -
         """
         guild = await self.bot.fetch_guild(ctx.guild.id)
         author = str(ctx.message.author.id)

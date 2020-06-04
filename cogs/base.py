@@ -9,12 +9,10 @@ class BaseCog(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
-    async def joined(self, ctx, *, member: discord.Member = None):
+    async def user_info(self, ctx, *, member: discord.Member = None):
         """
         Displays when a given member joined the server.
-        :param ctx: Context, command context.
         :param member: discord.Member, given member.
-        :return: -
         """
         if not member:
             member = ctx.author
@@ -24,8 +22,6 @@ class BaseCog(commands.Cog):
     async def ping(self, ctx):
         """
         Simple debug command.
-        :param ctx: Context, command context.
-        :return: -
         """
         await ctx.send('Pong >w<')
 
@@ -33,8 +29,6 @@ class BaseCog(commands.Cog):
     async def help(self, ctx):
         """
         Displays Garlic Bread's help doc.
-        :param ctx: Context, command context.
-        :return: -
         """
         with open("help_embed.json") as json_file:
             embed_json = json.load(json_file)
