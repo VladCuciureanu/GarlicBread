@@ -91,10 +91,10 @@ Guild ID: {Insert your server's ID here}
 ```
 5. If all went well you should see something like this:
 ```
-Logged in as: {Your Bot's Nickname} - {Your Bot's UID}
-Version: {Some version}
-
 Successfully logged in and booted...!
+Logged in as ----> {Your bot's nick}
+ID: {Your bot's ID}
+Version: {Discord.py Version}
 ```
 
 
