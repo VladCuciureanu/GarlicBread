@@ -12,6 +12,7 @@ class BaseCog(commands.Cog):
     async def user_info(self, ctx, *, member: discord.Member = None):
         """
         Displays when a given member joined the server.
+        :param ctx: Context, command context.
         :param member: discord.Member, given member.
         """
         if not member:

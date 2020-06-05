@@ -10,6 +10,7 @@ class MiscCog(commands.Cog):
     async def uwu(self, ctx, prompt: str):
         """
         Definitely wont explain this.
+        :param ctx: Context, command context.
         :param prompt: prompt shortcuts
         """
         text = "Owo what's this?"

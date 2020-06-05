@@ -1,7 +1,6 @@
 import discord
 from discord.ext import commands
-import os
-import pickle
+import global_vars
 
 
 def rgb_to_color(r, g, b):
@@ -36,11 +35,6 @@ def rgb_to_color(r, g, b):
 class RolesCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.roles = {}
-        if os.path.exists("roles.grlk"):
-            self.roles = pickle.load(open("roles.grlk", "rb"))
-        else:
-            pickle.dump(self.roles, file=open("roles.grlk", "wb"))
 
     @commands.command()
     @commands.guild_only()
@@ -60,18 +54,18 @@ class RolesCog(commands.Cog):
             color_obj = discord.Colour.from_rgb(rgb[0], rgb[1], rgb[2])
         else:
             raise ValueError("Invalid number of arguments.")
-        
-        self.roles = pickle.load(open("roles.grlk", "rb"))
-        if str(ctx.guild.id) not in self.roles:
-            self.roles[str(ctx.guild.id)] = {}
 
-        if author not in self.roles[str(ctx.guild.id)]:
-            role = await guild.create_role(name=author, color=color_obj, mentionable=False, reason="Color")
-            self.roles[str(ctx.guild.id)][author] = role.id
-            pickle.dump(self.roles, file=open("roles.grlk", "wb"))
+        roles = global_vars.config_manager.get_roles()
+
+        if str(guild.id) not in roles or author not in roles[str(guild.id)]:
+            print("Added new role")
+            role = await guild.create_role(name=str(author.id), color=color_obj, mentionable=False, reason="Color")
+            global_vars.config_manager.add_role(str(guild.id), author, role.id)
             await ctx.message.author.add_roles(role)
+            roles = global_vars.config_manager.get_roles()
         else:
-            role = guild.get_role(self.roles[str(ctx.guild.id)][author])
+            print("Edited role")
+            role = guild.get_role(roles[str(ctx.guild.id)][author])
             await role.edit(color=color_obj)
 
     @commands.command()
@@ -90,18 +84,18 @@ class RolesCog(commands.Cog):
         for word in args:
             role_name += str(word)
             role_name += " "
-        
-        self.roles = pickle.load(open("roles.grlk", "rb"))
-        if str(ctx.guild.id) not in self.roles:
-            self.roles[str(ctx.guild.id)] = {}
 
-        if author not in self.roles[str(ctx.guild.id)]:
+        roles = global_vars.config_manager.get_roles()
+
+        if str(guild.id) not in roles or author not in roles[str(guild.id)]:
+            print("Added new role")
             role = await guild.create_role(name=role_name, mentionable=False, reason="Role")
-            self.roles[str(ctx.guild.id)][author] = role.id
-            pickle.dump(self.roles, file=open("roles.grlk", "wb"))
+            global_vars.config_manager.add_role(str(guild.id), author, role.id)
             await ctx.message.author.add_roles(role)
+            roles = global_vars.config_manager.get_roles()
         else:
-            role = guild.get_role(self.roles[str(ctx.guild.id)][author])
+            print("Edited role")
+            role = guild.get_role(roles[str(ctx.guild.id)][author])
             await role.edit(name=role_name)
 
 

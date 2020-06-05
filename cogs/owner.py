@@ -1,7 +1,7 @@
+import os
 import discord
 from discord.ext import commands
-import os
-import pickle
+import global_vars
 
 
 class OwnerCog(commands.Cog):
@@ -13,6 +13,7 @@ class OwnerCog(commands.Cog):
     async def module_load(self, ctx, *, cog: str):
         """
         Loads a module.
+        :param ctx: Context, command context.
         :param cog: str, module name.
         """
         try:
@@ -27,6 +28,7 @@ class OwnerCog(commands.Cog):
     async def module_unload(self, ctx, *, cog: str):
         """
         Unloads a module.
+        :param ctx: Context, command context.
         :param cog: str, module name.
         """
         try:
@@ -41,6 +43,7 @@ class OwnerCog(commands.Cog):
     async def module_reload(self, ctx, *, cog: str):
         """
         Reloads a module.
+        :param ctx: Context, command context.
         :param cog: str, module name.
         """
         try:
@@ -54,35 +57,10 @@ class OwnerCog(commands.Cog):
     @commands.command(hidden=True)
     @commands.is_owner()
     @commands.guild_only()
-    async def purge_roles(self, ctx):
-        """
-        Resets roles. Shouldn't be used. Deletes ALL roles.
-        """
-        deleted_counter = 0
-        guild = await self.bot.fetch_guild(ctx.guild.id)
-        role_list = guild.roles
-        try:
-            for role in role_list:
-                if role.name != "@everyone" and role.name != "Garlic Bread":
-                    print("Deleting role " + str(role.name) + "...")
-                    await role.delete()
-                    print("Deleted!")
-                    deleted_counter += 1
-            if deleted_counter > 0:
-                await ctx.send("Deleted " + str(deleted_counter) + " roles successfully!")
-            else:
-                await ctx.send("There's no roles to delete!")
-        except Exception as e:
-            print(e)
-        os.remove("roles.grlk")
-        pickle.dump({}, file=open("roles.grlk", "wb"))
-
-    @commands.command(hidden=True)
-    @commands.is_owner()
-    @commands.guild_only()
     async def purge_messages(self, ctx, *, count: int):
         """
         Deletes a given number of messages in chronological order.
+        :param ctx: Context, command context.
         :param count: int, number of messages to delete.
         """
         channel = ctx.message.channel
@@ -99,29 +77,23 @@ class OwnerCog(commands.Cog):
             await ctx.send("Currently being hosted on Heroku!")
         else:
             await ctx.send("I'm being hosted locally.")
-    
+
     @commands.command(hidden=True)
     @commands.is_owner()
     @commands.guild_only()
     async def save_roles(self, ctx):
-        roles = {}
-        if os.path.exists("roles.grlk"):
-            roles = pickle.load(open("roles.grlk", "rb"))
-        else:
-            pickle.dump(roles, file=open("roles.grlk", "wb"))
-            
+        """
+        Debugging tool. Please DO NOT USE.
+        :param ctx: Context, command context
+        """
         guild = ctx.guild
-        
-        if str(ctx.guild.id) not in roles:
-            roles[str(ctx.guild.id)] = {}
-        
+        roles = global_vars.config_manager.get_roles()
         async for member in guild.fetch_members():
             if member.id != self.bot.user.id:
                 member_roles = member.roles
                 if len(member_roles) > 1:
-                    roles[str(ctx.guild.id)][str(member.id)] = member_roles[1].id
-        
-        pickle.dump(roles, file=open("roles.grlk", "wb"))
+                    if str(member.id) not in roles[str(ctx.guild.id)]:
+                        global_vars.config_manager.add_role(str(ctx.guild.id), str(member.id), str(member_roles[1].id))
         await ctx.send("Saved roles successfully!")
 
     @commands.command(name='perms', aliases=['permissions'])
@@ -130,6 +102,7 @@ class OwnerCog(commands.Cog):
     async def check_permissions(self, ctx, *, member: discord.Member = None):
         """
         Displays the perms of a given member. If no member given, displays perms of author.
+        :param ctx: Context, command context.
         :param member: discord.Member, given member.
         """
         if not member:

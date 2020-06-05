@@ -1,5 +1,7 @@
 import discord
+import global_vars
 from discord.ext import commands
+
 
 class EventsCog(commands.Cog):
     def __init__(self, bot):
@@ -15,6 +17,9 @@ class EventsCog(commands.Cog):
         print('ID:', self.bot.user.id)
         print(f'Version: {discord.__version__}\n')
 
+        # Initialize config_manager
+        global_vars.config_manager.load()
+
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
         """
@@ -27,6 +32,7 @@ class EventsCog(commands.Cog):
             await ctx.send("TwT sowwy but u can't wun this command xP")
         else:
             print(error)
+
 
 def setup(bot):
     bot.add_cog(EventsCog(bot))
