@@ -59,13 +59,13 @@ class RolesCog(commands.Cog):
 
         if str(guild.id) not in roles or author not in roles[str(guild.id)]:
             print("Added new role")
-            role = await guild.create_role(name=str(author.id), color=color_obj, mentionable=False, reason="Color")
-            global_vars.config_manager.add_role(str(guild.id), author, role.id)
+            role = await guild.create_role(name=str(author), color=color_obj, mentionable=False, reason="Color")
+            await global_vars.config_manager.add_role(str(guild.id), author, role.id)
             await ctx.message.author.add_roles(role)
             roles = global_vars.config_manager.get_roles()
         else:
             print("Edited role")
-            role = guild.get_role(roles[str(ctx.guild.id)][author])
+            role = guild.get_role(int(roles[str(ctx.guild.id)][author]))
             await role.edit(color=color_obj)
 
     @commands.command()
@@ -90,12 +90,12 @@ class RolesCog(commands.Cog):
         if str(guild.id) not in roles or author not in roles[str(guild.id)]:
             print("Added new role")
             role = await guild.create_role(name=role_name, mentionable=False, reason="Role")
-            global_vars.config_manager.add_role(str(guild.id), author, role.id)
+            await global_vars.config_manager.add_role(str(guild.id), author, role.id)
             await ctx.message.author.add_roles(role)
             roles = global_vars.config_manager.get_roles()
         else:
             print("Edited role")
-            role = guild.get_role(roles[str(ctx.guild.id)][author])
+            role = guild.get_role(int(roles[str(ctx.guild.id)][author]))
             await role.edit(name=role_name)
 
 

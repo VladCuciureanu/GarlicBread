@@ -92,8 +92,8 @@ class OwnerCog(commands.Cog):
             if member.id != self.bot.user.id:
                 member_roles = member.roles
                 if len(member_roles) > 1:
-                    if str(member.id) not in roles[str(ctx.guild.id)]:
-                        global_vars.config_manager.add_role(str(ctx.guild.id), str(member.id), str(member_roles[1].id))
+                    if str(ctx.guild.id) not in roles or str(member.id) not in roles[str(ctx.guild.id)]:
+                        await global_vars.config_manager.add_role(str(ctx.guild.id), str(member.id), str(member_roles[1].id))
         await ctx.send("Saved roles successfully!")
 
     @commands.command(name='perms', aliases=['permissions'])

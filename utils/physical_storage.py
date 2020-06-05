@@ -10,7 +10,7 @@ class PhysicalStorage:
         self.guilds = None
         self.token = None
 
-    def load(self):
+    async def load(self):
         # Roles
         if self.roles_file.is_file():
             print("Loading roles file...")
@@ -32,7 +32,7 @@ class PhysicalStorage:
             self.guilds_file.write_text(json.dumps(self.guilds))
             print("Generated guilds file!")
 
-    def save(self, roles=True, guilds=True):
+    async def save(self, roles=True, guilds=True):
         # Sanity check
         if self.roles is None or self.guilds is None or self.token is None:
             raise RuntimeError("Configs not properly initialized! Please load() before modifying.")
@@ -79,15 +79,15 @@ class PhysicalStorage:
     Roles
     """
 
-    def add_role(self, guild_id, user_id, role_id):
+    async def add_role(self, guild_id, user_id, role_id):
         guild_id = str(guild_id)
         user_id = str(user_id)
         if guild_id not in self.roles:
             self.roles[guild_id] = {}
         self.roles[guild_id][user_id] = role_id
-        self.save(roles=True, guilds=False)
+        await self.save(roles=True, guilds=False)
 
-    def del_role(self, role_id):
+    async def del_role(self, role_id):
         role_id = str(role_id)
         trigger = False
         for guild in self.roles:
@@ -98,13 +98,13 @@ class PhysicalStorage:
         if not trigger:
             raise KeyError("Couldn't find given role.")
         else:
-            self.save(roles=True, guilds=False)
+            await self.save(roles=True, guilds=False)
 
     """
     Guilds
     """
 
-    def add_guild(self, guild_id, guild_role_id):
+    async def add_guild(self, guild_id, guild_role_id):
         guild_id = str(guild_id)
         guild_role_id = str(guild_role_id)
         if guild_id not in self.guilds:
@@ -113,9 +113,9 @@ class PhysicalStorage:
             self.guilds[guild_id][guild_role_id] = []
         else:
             raise ValueError("Guild already exists!")
-        self.save(roles=False, guilds=True)
+        await self.save(roles=False, guilds=True)
 
-    def del_guild(self, guild_role_id):
+    async def del_guild(self, guild_role_id):
         guild_role_id = str(guild_role_id)
         trigger = False
         for guild in self.guilds:
@@ -125,4 +125,4 @@ class PhysicalStorage:
         if not trigger:
             raise KeyError("Couldn't find given guild.")
         else:
-            self.save(roles=False, guilds=True)
+            await self.save(roles=False, guilds=True)

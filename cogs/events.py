@@ -18,7 +18,7 @@ class EventsCog(commands.Cog):
         print(f'Version: {discord.__version__}\n')
 
         # Initialize config_manager
-        global_vars.config_manager.load()
+        await global_vars.config_manager.load()
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):

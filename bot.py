@@ -8,6 +8,10 @@ from utils.cloud_storage import CloudStorage
 from utils.physical_storage import PhysicalStorage
 
 
+"""
+Configurations
+"""
+
 # Cogs list
 extensions = ['cogs.base',
               'cogs.roles',
@@ -25,22 +29,26 @@ def get_prefix(bot_obj, message):
     return commands.when_mentioned_or(*prefixes)(bot_obj, message)
 
 
+"""
+Driver code
+"""
+
+# Declaring bot variable
 bot = commands.Bot(command_prefix=get_prefix, description='Fresh out of the oven.') # Main bot variable
 bot.remove_command("help") # Removes standard help command in order to implement our own.
 
-# Cogs loading
+# Loading Cogs
 if __name__ == '__main__':
     for ext in extensions:
         bot.load_extension(ext)
 
-# Driver Code
-"""
-if "TOKEN" in os.environ:
+# Loading Configs
+if "GARLIC_TOKEN" in os.environ:
     print("Using cloud storage!")
     global_vars.config_manager = CloudStorage(bot)
-else:"""
-print("Using physical storage!")
-global_vars.config_manager = PhysicalStorage()
+else:
+    print("Using physical storage!")
+    global_vars.config_manager = PhysicalStorage()
 
 # Initializing the bot
 try:
