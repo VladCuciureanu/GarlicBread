@@ -17,7 +17,8 @@ class CloudStorage:
         storage_channel = self.bot.get_channel(self.storage_channel_id)
         raw_data = ""
         async for message in storage_channel.history(limit=None, oldest_first=True):
-            raw_data += message.content
+            if message.author.id == self.bot.user.id:
+                raw_data += message.content
 
         json_data = None
 
