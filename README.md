@@ -31,7 +31,7 @@
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
 * [Getting Started](#getting-started)
-  * [Run](#run)
+  * [Setup](#setup)
 * [Usage](#usage)
 * [Contributing](#contributing)
 * [License](#license)
@@ -51,6 +51,8 @@ So I made this bot to fill both metaphorical holes in the server and in my heart
 Implemented features:
  * Custom role name and color
  * Hot-swappable modules (cogs)
+ * Physical storage (.grlk files)
+ * Cloud storage (e.g. for Heroku's free tier hosting)
  * Purge messages
  * Uwu
 
@@ -69,32 +71,49 @@ Planned features:
 
 To get a local copy up and running follow these simple steps.
 
-### Run
+### Setup
 
-1. Clone the repo
+1. Clone the repo:
 ```sh
 git clone https://github.com/VladCuciureanu/garlic-bread.git && cd garlic-bread
 ```
-2. Install requirements
+2. Install requirements:
 ```sh
 pip3 install -r requirements.txt
 ```
-3. Run bot.py
+3.1 Persistent storage setup:
+```
+Use this if you have a dedicated VPS or if you're hosting it on your own server or PC.
+No pre-setup is needed. Just skip to step 4 and follow the on-screen instructions.
+```
+3.2 Ephemeral storage setup:
+```
+I added this for budget bot hosts. For example, Heroku's free tier.
+This setup takes a bit more time to setup but not too much.
+
+ 1. Setup a dedicated storage text channel. It can be in your discord server
+or in an auxiliary discord server. It can even be the DM text channel between you
+and Garlic Bread, but that takes a bit more tinkering in order to get the channel ID.
+
+Note: To prevent data-loss, make sure only Garlic Bread can post there and no other
+posts are present there.
+
+ 2. Copy that channel's ID. 
+
+ 3. Add the following environment variables (config vars):
+GARLIC_TOKEN: {Your Bot Token}
+GARLIC_STORAGE_CHANNEL: {Your dedicated text channel's ID}
+```
+4. Run bot.py:
 ```sh
 python3 bot.py
 ```
-4. Follow the setup wizard
-```
-Just input the requested info such as the bot token provided by the Discord dev platform.
-Bot Token: {Insert your Bot Token here}
-Guild ID: {Insert your server's ID here}
-```
 5. If all went well you should see something like this:
 ```
-Logged in as: {Your Bot's Nickname} - {Your Bot's UID}
-Version: {Some version}
-
 Successfully logged in and booted...!
+Logged in as ----> {Your bot's username and #}
+ID: {Your bot's user ID}
+Version: {Discord.py version}
 ```
 
 
