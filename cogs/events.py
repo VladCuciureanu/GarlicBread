@@ -28,10 +28,10 @@ class EventsCog(commands.Cog):
         if type(error) == discord.ext.commands.errors.CommandNotFound:
             if ctx.message.content[1].isalpha():
                 await ctx.send("Owo what's this command? \\*confused noises\\*")
-        elif type(error) == discord.ext.commands.errors.CheckFailure:
+        elif type(error) == discord.ext.commands.errors.CheckFailure or type(error) == discord.ext.commands.errors.NotOwner:
             await ctx.send("TwT sowwy but u can't wun this command xP")
         else:
-            print(error)
+            print(str(type(error))+": "+str(error))
 
 
 def setup(bot):
