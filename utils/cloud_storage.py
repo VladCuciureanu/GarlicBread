@@ -19,7 +19,9 @@ class CloudStorage:
         async for message in storage_channel.history(limit=None, oldest_first=True):
             if message.author.id == self.bot.user.id:
                 raw_data += message.content
-
+            else:
+                break
+        
         json_data = None
 
         if raw_data == "":
