@@ -22,6 +22,14 @@ class MiscCog(commands.Cog):
             text = "\*sad uwu noises\*"
         await ctx.send(str(text))
 
+    @commands.command(name='hmm', aliases=['hmmm','hmmmm'])
+    async def hmm(self, ctx):
+        """
+        Toss a coin.
+        :param ctx: Context, command context.
+        """
+        await ctx.send("...fuck.")
+
 
 def setup(bot):
     bot.add_cog(MiscCog(bot))
