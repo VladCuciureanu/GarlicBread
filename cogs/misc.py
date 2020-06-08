@@ -1,5 +1,6 @@
 import discord
 import json
+import random
 from pathlib import Path
 from discord.ext import commands
 
@@ -28,6 +29,18 @@ class MiscCog(commands.Cog):
         :param ctx: Context, command context.
         """
         await ctx.send("...fuck.")
+
+    @commands.command(name='roll')
+    async def roll(self, ctx, d : int = 6):
+        """
+        Rolls a dice in given size.
+        :param ctx: Context, command context.
+        """
+        if d >= 1:
+            roll = random.randint(1, d)
+            await ctx.send("Rolled a D"+str(d)+" and got "+str(roll)+".")
+        else:
+            await ctx.send("Dice cant have 0 sides or less...")
 
 
 def setup(bot):
