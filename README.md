@@ -56,9 +56,6 @@ Implemented features:
  * Purge messages
  * Uwu
 
-Planned features:
- * Guilds (custom visible role name for >2 players at all times)
-
 ### Built With
 
 * [Python 3.6](https://www.python.org/downloads/release/python-360/)
