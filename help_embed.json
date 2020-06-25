@@ -42,7 +42,7 @@
          "fields":[
             {
                "name":"**Join Date**",
-               "value":"> >joined ***@{member}***"
+               "value":"> >user_info ***@{member}***"
             },
             {
                "name":"**Check if bot works**",
