@@ -40,7 +40,7 @@ class MiscCog(commands.Cog):
             roll = random.randint(1, d)
             await ctx.send("Rolled a D"+str(d)+" and got "+str(roll)+".")
         else:
-            await ctx.send("Dice cant have 0 sides or less...")
+            await ctx.send("Dice must have at least 1 side...")
 
 
 def setup(bot):
