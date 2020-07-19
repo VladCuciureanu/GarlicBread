@@ -42,7 +42,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<!-- Photo of this project TBA -->
+#### Click [here](https://discord.com/api/oauth2/authorize?client_id=697481393609113810&permissions=8&scope=bot) to invite Garlic Bread to your server
 
 With my private Discord server slowly rising in members count, I had to face the cold hard truth...\
 Something was still missing...
