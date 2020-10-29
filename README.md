@@ -145,6 +145,6 @@ Distributed under the GNU GPLv3 License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Vlad CUCIUREANU - [@VladTheWicked](https://twitter.com/VladTheWicked) - vlad.c.cuciureanu@gmail.com\
+Vlad CUCIUREANU - [@PollyWantsToDie](https://twitter.com/PollyWantsToDie) - vlad.c.cuciureanu@gmail.com\
 Sandevil Sandh (Logo Pic) - [@sandevil](https://unsplash.com/@sandevil)\
 Project Link: [https://github.com/VladCuciureanu/garlic-bread](https://github.com/VladCuciureanu/garlic-bread)
