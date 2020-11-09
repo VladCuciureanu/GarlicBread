@@ -52,7 +52,7 @@ Implemented features:
  * Custom role name and color
  * Hot-swappable modules (cogs)
  * Physical storage (.grlk files)
- * Cloud storage (e.g. for Heroku's free tier hosting)
+ * Ephemeral storage (e.g. for Heroku's free tier hosting)
  * Purge messages
  * Uwu
 
@@ -138,7 +138,7 @@ Contributions are what make the open source community such an amazing place to b
 <!-- LICENSE -->
 ## License
 
-Distributed under the GNU GPLv3 License. See `LICENSE` for more information.
+Distributed under the MIT License. See `LICENSE` for more information.
 
 
 
