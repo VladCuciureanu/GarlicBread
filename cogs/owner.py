@@ -1,5 +1,7 @@
 import os
 import discord
+import datetime
+from utils.timedelta_format import timedelta_format
 from discord.ext import commands
 import global_vars
 
@@ -112,6 +114,15 @@ class OwnerCog(commands.Cog):
         embed.set_author(icon_url=member.avatar_url, name=str(member))
         embed.add_field(name='\uFEFF', value=perms)
         await ctx.send(content=None, embed=embed)
+
+    @commands.command(name='uptime')
+    @commands.is_owner()
+    async def get_uptime(self, ctx):
+        """
+        Displays the bot's uptime.
+        """
+        uptime = datetime.datetime.now() - global_vars.start_time_date
+        await ctx.send(timedelta_format(uptime))
 
 
 def setup(bot):

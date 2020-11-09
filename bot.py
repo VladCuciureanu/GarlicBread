@@ -1,6 +1,6 @@
 import os
-import pickle
 import discord
+import datetime
 import global_vars
 from discord.ext import commands
 
@@ -41,6 +41,9 @@ bot.remove_command("help") # Removes standard help command in order to implement
 if __name__ == '__main__':
     for ext in extensions:
         bot.load_extension(ext)
+
+# Setting start time-date
+global_vars.start_time_date = datetime.datetime.now()
 
 # Loading Configs
 if "GARLIC_TOKEN" in os.environ:
