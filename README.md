@@ -17,8 +17,8 @@
     <a href="https://www.python.org/downloads/release/python-360">
       <img alt="Made with: Python 3.6" src="https://img.shields.io/badge/python-3.6-blue.svg" target="_blank" />
     </a>
-    <a href="https://www.gnu.org/licenses/gpl-3.0">
-      <img alt="License: GPL v3" src="https://img.shields.io/badge/License-GPLv3-blue.svg" target="_blank" />
+    <a href="https://github.com/VladCuciureanu/garlic-bread/blob/main/LICENSE">
+      <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg" target="_blank" />
     </a>
   </p>
 </p>
