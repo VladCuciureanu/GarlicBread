@@ -45,6 +45,10 @@
                "value":"> >user_info ***@{member}***"
             },
             {
+               "name":"**Roll dice**",
+               "value":"> >roll ***{dice sides}***"
+            },
+            {
                "name":"**Check if bot works**",
                "value":"> >ping"
             }
