@@ -34,7 +34,7 @@ Driver code
 """
 
 # Declaring bot variable
-bot = commands.Bot(command_prefix=get_prefix, description='Fresh out of the oven.') # Main bot variable
+bot = commands.Bot(command_prefix=get_prefix, description='Fresh out of the oven.')
 bot.remove_command("help") # Removes standard help command in order to implement our own.
 
 # Loading Cogs

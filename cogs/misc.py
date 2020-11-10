@@ -31,14 +31,15 @@ class MiscCog(commands.Cog):
         await ctx.send("...fuck.")
 
     @commands.command(name='roll')
-    async def roll(self, ctx, d : int = 6):
+    async def roll(self, ctx, dice_sides : int = 6):
         """
         Rolls a dice in given size.
+        :param dice_sides: int, the number of sides the dice should have.
         :param ctx: Context, command context.
         """
-        if d >= 1:
-            roll = random.randint(1, d)
-            await ctx.send("Rolled a D"+str(d)+" and got "+str(roll)+".")
+        if dice_sides >= 1:
+            roll = random.randint(1, dice_sides)
+            await ctx.send("Rolled a D" + str(dice_sides) + " and got " + str(roll) + ".")
         else:
             await ctx.send("Dice must have at least 1 side...")
 
