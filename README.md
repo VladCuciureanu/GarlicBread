@@ -9,6 +9,10 @@
   <p align="center">
     Fresh out of the oven.
     <br />
+    Notice: This project is a mess and I stopped working on it
+    <br />
+    since I disagree with Discord's privacy policy.
+    <br />
     <a href="https://github.com/VladCuciureanu/garlic-bread/issues">Report Bug</a>
     ·
     <a href="https://github.com/VladCuciureanu/garlic-bread/issues">Request Feature</a>
