@@ -28,7 +28,7 @@ class MiscCog(commands.Cog):
         Toss a coin.
         :param ctx: Context, command context.
         """
-        await ctx.send("...fuck.")
+        await ctx.send("...frick.")
 
     @commands.command(name='roll')
     async def roll(self, ctx, dice_sides : int = 6):
