@@ -1,0 +1,20 @@
+{
+  "Serilog": {
+    "WriteTo": [{"Name": "Console"}]
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Debug",
+      "System": "Information",
+      "Microsoft": "Information"
+    }
+  },
+  "Secrets": {
+    "Discord": {
+      "Token": ""
+    }
+  },
+  "ConnectionStrings": {
+    "Database": "Server=#####;Port=#####;User Id=#####;Password=#####;Database=#####;"
+  }
+}
