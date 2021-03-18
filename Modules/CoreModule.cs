@@ -7,6 +7,7 @@ using Disqord;
 using Disqord.Bot;
 using Disqord.Events;
 using GarlicBread.Discord;
+using Humanizer;
 using Microsoft.Extensions.Logging;
 using Qmmands;
 
@@ -69,6 +70,53 @@ namespace GarlicBread.Modules
                 Context.Bot.MessageReceived -= Handler;
             }
 
+            Context.Bot.MessageReceived += Handler;
+        }
+        
+        [Command("userinfo")]
+        [Description("Displays basic user info about the mentioned user.")]
+        [CommandCooldown(1, 3, CooldownMeasure.Seconds, CooldownType.User)]
+        [GuildOnly]
+        public async Task Command_UserInfo(CachedMember target = null)
+        {
+            target ??= Context.Member;
+
+            if (!Context.BotMember.GetPermissionsFor(Context.Channel as CachedTextChannel).SendMessages) return;
+
+            var initialMessage = await Context.Channel.SendMessageAsync("Fetching user info...").ConfigureAwait(false);
+            
+            async Task Handler(MessageReceivedEventArgs emsg)
+            {
+                try
+                {
+                    var msg = emsg.Message;
+                    if (msg.Id != initialMessage.Id) return;
+
+                    var _ = initialMessage.ModifyAsync(m =>
+                    {
+                        m.Content = null;
+                        var sb = new StringBuilder()
+                            .AppendLine($":wave: **Join date:** {target.JoinedAt.Humanize()}");
+                        
+                        if (Context.Bot.Latency != null)
+                            sb.AppendLine(
+                                $":handshake: **Gateway:** {(int) Context.Bot.Latency.Value.TotalMilliseconds}ms");
+                        
+                        m.Embed = new LocalEmbedBuilder()
+                            .WithTitle($"**{target.Name}**'s info")
+                            .WithTimestamp(DateTime.Now)
+                            .WithDescription(sb.ToString())
+                            .WithFooter($"Request {Context.RequestId}")
+                            .WithColor(Context.Color)
+                            .Build();
+                    });
+                }
+                catch (Exception e)
+                {
+                    Logger.LogError(e, "Error occurred during user info handler");
+                }
+                Context.Bot.MessageReceived -= Handler;
+            }
             Context.Bot.MessageReceived += Handler;
         }
     }
