@@ -153,4 +153,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Vlad CUCIUREANU - [@PollyWantsToDie](https://twitter.com/PollyWantsToDie) - vlad.c.cuciureanu@gmail.com\
 Sandevil Sandh (Logo Pic) - [@sandevil](https://unsplash.com/@sandevil)\
-Project Link: [https://github.com/VladCuciureanu/garlic-bread](https://github.com/VladCuciureanu/GarlicBread)
+Project Link: [https://github.com/VladCuciureanu/GarlicBread](https://github.com/VladCuciureanu/GarlicBread)
