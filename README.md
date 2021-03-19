@@ -1,6 +1,6 @@
 <!-- PROJECT LOGO -->
 <p align="center">
-  <a href="https://github.com/VladCuciureanu/garlic-bread">
+  <a href="https://github.com/VladCuciureanu/GarlicBread">
     <img src="logo.png" alt="Logo" width="160" height="160">
   </a>
 
@@ -15,15 +15,15 @@
     since I disagree with Discord's privacy policy.
     <br />
     </b>
-    <a href="https://github.com/VladCuciureanu/garlic-bread/issues">Report Bug</a>
+    <a href="https://github.com/VladCuciureanu/GarlicBread/issues">Report Bug</a>
     ·
-    <a href="https://github.com/VladCuciureanu/garlic-bread/issues">Request Feature</a>
+    <a href="https://github.com/VladCuciureanu/GarlicBread/issues">Request Feature</a>
     <br />
     <br />
     <a href="https://www.python.org/downloads/release/python-360">
       <img alt="Made with: Python 3.6" src="https://img.shields.io/badge/python-3.6-blue.svg" target="_blank" />
     </a>
-    <a href="https://github.com/VladCuciureanu/garlic-bread/blob/main/LICENSE">
+    <a href="https://github.com/VladCuciureanu/GarlicBread/blob/main/LICENSE">
       <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg" target="_blank" />
     </a>
   </p>
@@ -78,7 +78,7 @@ To get a local copy up and running follow these simple steps.
 
 1. Clone the repo:
 ```sh
-git clone https://github.com/VladCuciureanu/garlic-bread.git && cd garlic-bread
+git clone https://github.com/VladCuciureanu/GarlicBread.git && cd GarlicBread
 ```
 2. Install requirements:
 ```sh
@@ -153,4 +153,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Vlad CUCIUREANU - [@PollyWantsToDie](https://twitter.com/PollyWantsToDie) - vlad.c.cuciureanu@gmail.com\
 Sandevil Sandh (Logo Pic) - [@sandevil](https://unsplash.com/@sandevil)\
-Project Link: [https://github.com/VladCuciureanu/garlic-bread](https://github.com/VladCuciureanu/garlic-bread)
+Project Link: [https://github.com/VladCuciureanu/garlic-bread](https://github.com/VladCuciureanu/GarlicBread)
