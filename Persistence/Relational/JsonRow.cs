@@ -10,6 +10,6 @@ namespace GarlicBread.Persistence.Relational
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public ulong GuildId { get; set; }
 
-        [Column(TypeName = "jsonb")] public TData Data { get; set; } = new();
+        [Column(TypeName = "jsonb")] public TData Data { get; set; } = new TData();
     }
 }

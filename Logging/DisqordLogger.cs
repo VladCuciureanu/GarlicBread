@@ -10,7 +10,7 @@ namespace GarlicBread.Logging
     {
         private readonly ILoggerFactory _factory;
 
-        private readonly Dictionary<LogSeverity, LogLevel> _map = new()
+        private readonly Dictionary<LogSeverity, LogLevel> _map = new Dictionary<LogSeverity, LogLevel>()
         {
             {LogSeverity.Trace, LogLevel.Trace},
             {LogSeverity.Debug, LogLevel.Debug},

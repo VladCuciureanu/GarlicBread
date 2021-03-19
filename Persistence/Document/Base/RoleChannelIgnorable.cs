@@ -6,8 +6,8 @@ namespace GarlicBread.Persistence.Document
 {
     public abstract class RoleChannelIgnorable : JsonEnabledState
     {
-        public List<ulong> IgnoredRoles { get; set; } = new();
-        public List<ulong> IgnoredChannels { get; set; } = new();
+        public List<ulong> IgnoredRoles { get; set; } = new List<ulong>();
+        public List<ulong> IgnoredChannels { get; set; } = new List<ulong>();
 
         public IEnumerable<CachedTextChannel> GetIgnoredChannels(CachedGuild guild)
         {

@@ -29,7 +29,7 @@ namespace GarlicBread.Discord
         protected override ValueTask<DiscordCommandContext> GetCommandContextAsync(CachedUserMessage message,
             IPrefix prefix)
         {
-            return new(CreateContext(message, prefix, RuntimeFlags.None));
+            return new ValueTask<DiscordCommandContext>(CreateContext(message, prefix, RuntimeFlags.None));
         }
 
         public DiscordCommandContext CreateContext(CachedUserMessage message, IPrefix prefix, RuntimeFlags flags)

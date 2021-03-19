@@ -9,7 +9,7 @@ namespace GarlicBread.Extensions
     public static class TypeExtensions
     {
         public static bool HasCustomAttribute<TAttributeType>(this Type type,
-            [NotNullWhen(true)] out TAttributeType? attribute) where TAttributeType : Attribute
+            [NotNullWhen(true)] out TAttributeType attribute) where TAttributeType : Attribute
         {
             var attr = type.GetCustomAttributes(typeof(TAttributeType), true).FirstOrDefault();
             if (attr != null)
