@@ -78,6 +78,16 @@ namespace GarlicBread.Modules
             {
                 await restMessage.DeleteAsync();
             }
+
+            await Context.User.SendMessageAsync(
+                "",
+                false,
+                new LocalEmbedBuilder()
+                    .WithTitle($"**{Context.BotMember.Name}** finished purging {limit} messages.")
+                    .WithColor(Context.Color)
+                    .WithTimestamp(DateTime.Now)
+                    .WithFooter($"Request {Context.RequestId}")
+                    .Build());
         }
     }
 }
