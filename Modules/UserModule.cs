@@ -27,16 +27,18 @@ namespace GarlicBread.Modules
     public class UserModule : GarlicBreadModuleBase
     {
         public ILogger<CoreModule> Logger { get; set; }
-        
+
         [Command("avatar", "av", "a", "pic", "pfp")]
         [Description("Grabs the avatar for a user.")]
         [CommandCooldown(1, 3, CooldownMeasure.Seconds, CooldownType.User)]
-        public async Task GetAvatarAsync(
-            [Name("User")]
-            [Description("The user who you wish to get the avatar for.")]
+        public async Task Command_GetAvatar(
+            [Name("User")] [Description("The user who you wish to get the avatar for.")]
             CachedMember target = null)
         {
             target ??= Context.Member;
+            
+            if (!Context.BotMember.GetPermissionsFor(Context.Channel as CachedTextChannel).SendMessages) return;
+            
             await ReplyAsync(embed: new LocalEmbedBuilder()
                 .WithAuthor(target)
                 .WithColor(Context.Color)
@@ -47,7 +49,7 @@ namespace GarlicBread.Modules
                                  $"{UrlHelper.CreateMarkdownUrl("2048", target.GetAvatarUrl(size: 2048))}")
                 .Build());
         }
-        
+
         [GuildOnly]
         [Command("userinfo", "info", "ui", "joined", "age")]
         [Description("Displays basic user info about the mentioned user.")]
@@ -67,15 +69,11 @@ namespace GarlicBread.Modules
                     var msg = emsg.Message;
                     if (msg.Id != initialMessage.Id) return;
 
-                    var _ = initialMessage.ModifyAsync(m =>
+                    await initialMessage.ModifyAsync(m =>
                     {
                         m.Content = null;
                         var sb = new StringBuilder()
                             .AppendLine($":wave: **Join date:** {target.JoinedAt.Humanize()}");
-
-                        if (Context.Bot.Latency != null)
-                            sb.AppendLine(
-                                $":handshake: **Gateway:** {(int) Context.Bot.Latency.Value.TotalMilliseconds}ms");
 
                         m.Embed = new LocalEmbedBuilder()
                             .WithTitle($"**{target.Name}**'s info")

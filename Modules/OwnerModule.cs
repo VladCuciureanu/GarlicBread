@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 using Disqord;
+using Disqord.Bot;
 using Disqord.Events;
 using GarlicBread.Discord;
 using Humanizer;
@@ -23,7 +24,7 @@ namespace GarlicBread.Modules
         {
             if (!Context.BotMember.GetPermissionsFor(Context.Channel as CachedTextChannel).SendMessages) return;
 
-            var initialMessage = await Context.Channel.SendMessageAsync("Fetching user info...").ConfigureAwait(false);
+            var initialMessage = await Context.Channel.SendMessageAsync("Fetching bot info...").ConfigureAwait(false);
 
             async Task Handler(MessageReceivedEventArgs emsg)
             {
@@ -32,7 +33,7 @@ namespace GarlicBread.Modules
                     var msg = emsg.Message;
                     if (msg.Id != initialMessage.Id) return;
 
-                    var _ = initialMessage.ModifyAsync(m =>
+                    await initialMessage.ModifyAsync(m =>
                     {
                         m.Content = null;
                         var sb = new StringBuilder()
@@ -63,6 +64,7 @@ namespace GarlicBread.Modules
             Context.Bot.MessageReceived += Handler;
         }
         
+        [GuildOnly]
         [Command("purge", "purgemessages")]
         [Description("Displays the bot's uptime.")]
         [CommandCooldown(1, 3, CooldownMeasure.Seconds, CooldownType.User)]

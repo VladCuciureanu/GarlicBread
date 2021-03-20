@@ -90,6 +90,7 @@ namespace GarlicBread
                     Logger = services.GetRequiredService<DisqordLogger>()
                 })
                 .AddSingleton<HelpService>()
+                .AddSingleton<RoleService>()
                 .AddHostedService<GarlicBreadServiceHost>()
                 .AddSingleton<GarlicBreadDiscordBot>();
         }

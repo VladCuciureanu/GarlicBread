@@ -19,7 +19,7 @@ namespace GarlicBread.Persistence.Relational
 
         public DbSet<JsonRow<GuildConfig>> GuildConfigurations { get; set; }
 
-        public DbSet<Reminder> Reminders { get; set; }
+        public DbSet<CustomizableRole> CustomizableRoles { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -31,6 +31,11 @@ namespace GarlicBread.Persistence.Relational
             var connectionString = configuration.GetConnectionString("Database");
 
             optionsBuilder.UseNpgsql(connectionString);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CustomizableRole>().HasKey(cr => new {cr.GuildId, cr.UserId, cr.RoleId});
         }
 
         public async Task<TJsonObject> GetJsonObjectAsync<TJsonObject>(
