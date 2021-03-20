@@ -1,11 +1,13 @@
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Disqord;
 using Disqord.Bot;
 using Disqord.Events;
+using Disqord.Rest;
 using GarlicBread.Discord;
 using Humanizer;
 using Microsoft.Extensions.Logging;
@@ -71,6 +73,35 @@ namespace GarlicBread.Modules
             }
 
             Context.Bot.MessageReceived += Handler;
+        }
+        
+        [Command("help", "?")]
+        [Description("Sends the user a list of all available commands.")]
+        [CommandCooldown(1, 3, CooldownMeasure.Seconds, CooldownType.User)]
+        public async Task Command_Help()
+        {
+            var modules = Context.Bot.GetAllModules()
+                .Skip(1)
+                .ToList()
+                .OrderBy(m => m.Name);
+            
+            foreach (var module in modules)
+            {
+                var sb = new StringBuilder();
+
+                foreach (var command in module.Commands)
+                {
+                    sb.AppendLine($"**{command.Name}**: {command.Description}");
+                }
+                
+                var embed = new LocalEmbedBuilder()
+                    .WithTitle($"{module.Name} Commands:")
+                    .WithDescription(sb.ToString())
+                    .WithColor(Color.Purple)
+                    .Build();
+                
+                await Context.Message.Author.SendMessageAsync("", false, embed).ConfigureAwait(false);
+            }
         }
     }
 }

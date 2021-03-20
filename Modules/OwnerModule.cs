@@ -13,6 +13,7 @@ using Qmmands;
 
 namespace GarlicBread.Modules
 {
+    [Name("Owner")]
     public class OwnerModule : GarlicBreadModuleBase
     {
         public ILogger<CoreModule> Logger { get; set; }
