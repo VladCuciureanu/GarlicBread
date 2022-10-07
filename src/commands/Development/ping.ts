@@ -4,7 +4,7 @@ import { send } from '@sapphire/plugin-editable-commands';
 import { Message } from 'discord.js';
 
 @ApplyOptions<Command.Options>({
-	description: 'ping pong'
+	description: 'Pong!'
 })
 export class UserCommand extends Command {
 	// Register slash and context menu command
@@ -30,9 +30,9 @@ export class UserCommand extends Command {
 	public async messageRun(message: Message) {
 		const msg = await send(message, 'Ping?');
 
-		const content = `Pong! Bot Latency ${Math.round(this.container.client.ws.ping)}ms. API Latency ${
-			(msg.editedTimestamp || msg.createdTimestamp) - (message.editedTimestamp || message.createdTimestamp)
-		}ms.`;
+		const botLatency = Math.round(this.container.client.ws.ping);
+		const apiLatency = (msg.editedTimestamp || msg.createdTimestamp) - (message.editedTimestamp || message.createdTimestamp);
+		const content = _generateMessage(botLatency, apiLatency);
 
 		return send(message, content);
 	}
@@ -41,9 +41,9 @@ export class UserCommand extends Command {
 		const msg = await interaction.reply({ content: 'Ping?', fetchReply: true });
 		const createdTime = msg instanceof Message ? msg.createdTimestamp : Date.parse(msg.timestamp);
 
-		const content = `Pong! Bot Latency ${Math.round(this.container.client.ws.ping)}ms. API Latency ${
-			createdTime - interaction.createdTimestamp
-		}ms.`;
+		const botLatency = Math.round(this.container.client.ws.ping);
+		const apiLatency = createdTime - interaction.createdTimestamp;
+		const content = _generateMessage(botLatency, apiLatency);
 
 		return await interaction.editReply({
 			content: content
@@ -54,12 +54,16 @@ export class UserCommand extends Command {
 		const msg = await interaction.reply({ content: 'Ping?', fetchReply: true });
 		const createdTime = msg instanceof Message ? msg.createdTimestamp : Date.parse(msg.timestamp);
 
-		const content = `Pong! Bot Latency ${Math.round(this.container.client.ws.ping)}ms. API Latency ${
-			createdTime - interaction.createdTimestamp
-		}ms.`;
+		const botLatency = Math.round(this.container.client.ws.ping);
+		const apiLatency = createdTime - interaction.createdTimestamp;
+		const content = _generateMessage(botLatency, apiLatency);
 
 		return await interaction.editReply({
 			content: content
 		});
 	}
 }
+
+const _generateMessage = (botLatency: number, apiLatency: number) => {
+	return `🏓 Pong! Bot Latency ${botLatency}ms. API Latency ${apiLatency}ms.`;
+};
