@@ -14,55 +14,55 @@ export class RoleCommand extends Command {
 		const guildId = interaction.guild!.id;
 		const newName = interaction.options.getString('name', false);
 		const newColor = interaction.options.getString('color', false);
+		interaction.deferReply({ ephemeral: true });
 
-		var roleEntry = await prisma.customRole.findFirst({
-			where: {
-				userSnowflake: userId,
-				guildSnowflake: guildId
-			}
-		});
+		var role: Role | undefined;
 
-		if (roleEntry === null) {
-			const newRole = await new Promise<Role>((resolve, _) => {
-				interaction.guild!.roles.create({ hoist: true, mentionable: false }).then((newRole) => resolve(newRole));
-			});
-			await new Promise((resolve, _) => {
-				interaction
-					.guild!.members.fetch(userId)
-					.then((user) => user.roles.add(newRole))
-					.then(() => resolve(null));
-			});
-			roleEntry = await prisma.customRole.create({
-				data: {
+		// Try to fetch role
+		await prisma.customRole
+			.findFirst({
+				where: {
 					userSnowflake: userId,
-					guildSnowflake: guildId,
-					roleSnowflake: newRole.id
+					guildSnowflake: guildId
+				}
+			})
+			.then(async (entry) => {
+				if (entry !== null) {
+					role = await new Promise<Role | undefined>((resolve, _) => {
+						interaction.guild!.roles.fetch(entry.roleSnowflake).then((result) => resolve(result !== null ? result : undefined));
+					});
 				}
 			});
-		}
 
-		var role = await new Promise<Role | null>((resolve, _) => {
-			interaction.guild!.roles.fetch(roleEntry!.roleSnowflake).then((foundRole) => resolve(foundRole));
-		});
-
-		if (role === null) {
+		// If no db entry or no role could be found, create one
+		if (role === undefined) {
 			role = await new Promise<Role>((resolve, _) => {
-				interaction.guild!.roles.create({ hoist: true, mentionable: false }).then((newRole) => resolve(newRole));
-			});
-			await new Promise((resolve, _) => {
-				interaction
-					.guild!.members.fetch(userId)
-					.then((user) => user.roles.add(role as Role))
-					.then(() => resolve(null));
-			});
-			await prisma.customRole.update({
-				where: { userSnowflake_guildSnowflake: { userSnowflake: userId, guildSnowflake: guildId } },
-				data: {
-					roleSnowflake: role.id
-				}
+				interaction.guild!.roles.create({ hoist: true, mentionable: false }).then((role) => {
+					interaction
+						.guild!.members.fetch(userId)
+						.then((user) => user.roles.add(role))
+						.then(
+							async () =>
+								await prisma.customRole.upsert({
+									create: {
+										userSnowflake: userId,
+										guildSnowflake: guildId,
+										roleSnowflake: role.id
+									},
+									update: {
+										roleSnowflake: role.id
+									},
+									where: {
+										userSnowflake_guildSnowflake: { userSnowflake: userId, guildSnowflake: guildId }
+									}
+								})
+						)
+						.then(() => resolve(role));
+				});
 			});
 		}
 
+		// Set role's properties
 		if (newName !== null) {
 			await new Promise((resolve, _) => {
 				this.container.logger.info(`Setting new name for role ${(role as Role).id}...`);
@@ -76,6 +76,8 @@ export class RoleCommand extends Command {
 				role?.setColor('DARK_GOLD').then(() => resolve(null));
 			});
 		}
+
+		interaction.followUp({ content: '✨ Enjoy your snazzy new role! ✨', ephemeral: true });
 	}
 
 	public override registerApplicationCommands(registry: ApplicationCommandRegistry): void {
