@@ -4,10 +4,10 @@ import { CommandInteraction, MessageEmbed } from 'discord.js';
 
 @ApplyOptions<CommandOptions>({
 	name: 'userinfo',
-	description: `Responds with a user's info`,
+	description: `Fetch a user's info`,
 	preconditions: ['GuildOnly']
 })
-export class AvatarCommand extends Command {
+export class UserInfoCommand extends Command {
 	public override async chatInputRun(interaction: CommandInteraction) {
 		const user = interaction.options.getUser('user', true);
 		const guildUser = interaction.guild?.members.cache.get(user.id);

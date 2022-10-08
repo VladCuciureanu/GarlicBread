@@ -6,7 +6,7 @@ import { Message } from 'discord.js';
 @ApplyOptions<Command.Options>({
 	description: 'Pong!'
 })
-export class UserCommand extends Command {
+export class PingCommand extends Command {
 	// Register slash and context menu command
 	public override registerApplicationCommands(registry: Command.Registry) {
 		// Register slash command
