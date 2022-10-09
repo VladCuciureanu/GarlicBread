@@ -1,7 +1,8 @@
 import { ApplyOptions } from '@sapphire/decorators';
 import { ApplicationCommandRegistry, Command, CommandOptions } from '@sapphire/framework';
-import type { CommandInteraction, Role } from 'discord.js';
+import type { CommandInteraction, HexColorString, Role } from 'discord.js';
 import prisma from '../../lib/prisma';
+import { parse as parseColor } from '../../lib/utils/color';
 
 @ApplyOptions<CommandOptions>({
 	name: 'role',
@@ -12,7 +13,7 @@ export class RoleCommand extends Command {
 	public override async chatInputRun(interaction: CommandInteraction) {
 		const userId = interaction.user.id;
 		const guildId = interaction.guild!.id;
-		const newName = interaction.options.getString('name', false);
+		const newName = interaction.options.getString('role-name', false);
 		const newColor = interaction.options.getString('color', false);
 		interaction.deferReply({ ephemeral: true });
 
@@ -70,10 +71,11 @@ export class RoleCommand extends Command {
 			});
 		}
 
-		if (newColor !== null) {
+		if (newColor !== null && parseColor(newColor) !== null) {
+			const color = parseColor(newColor as string)!.hex.toString();
 			await new Promise((resolve, _) => {
 				this.container.logger.info(`Setting new color for role ${(role as Role).id}...`);
-				role?.setColor('DARK_GOLD').then(() => resolve(null));
+				role?.setColor(color as HexColorString).then(() => resolve(null));
 			});
 		}
 
@@ -88,7 +90,7 @@ export class RoleCommand extends Command {
 				{
 					type: 'STRING',
 					required: false,
-					name: 'name',
+					name: 'role-name',
 					description: `What should your role be named?`
 				},
 				{
