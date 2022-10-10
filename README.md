@@ -5,7 +5,7 @@
 <img align="right" src="assets/logo.png" height="150px" alt="TBA">
 
 **Garlic Bread** is a _fun_, _simple_ and _useful_ bot written
-using **Discord.JS** with some features I needed for my guild.
+using **Discord.JS**. It has some features that I needed for my guild. This bot is designed for casual, simple guilds.
 
 ### Features
 
