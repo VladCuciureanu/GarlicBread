@@ -59,5 +59,5 @@ We appreciate your help!
 To contribute, please read our
 [contributing instructions](https://github.com/VladCuciureanu/GarlicBread/blob/main/CONTRIBUTING.md).
 
-[twitter badge]: https://twitter.com/intent/follow?screen_name=vladinskidev
-[twitter handle]: https://img.shields.io/twitter/follow/vladinskidev.svg?style=social&label=Follow
+[twitter badge]: https://twitter.com/intent/follow?screen_name=VladCuciureanu_
+[twitter handle]: https://img.shields.io/twitter/follow/VladCuciureanu_.svg?style=social&label=Follow
