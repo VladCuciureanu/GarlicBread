@@ -4,8 +4,8 @@
   "main": "dist/index.js",
   "author": {
     "name": "Vlad Cuciureanu",
-    "email": "vladcuciureanu@pm.me",
-    "url": "https://vladinski.md"
+    "email": "vlad.cuciureanu@pm.me",
+    "url": "https://vladcuciureanu.com"
   },
   "license": "MIT",
   "dependencies": {
