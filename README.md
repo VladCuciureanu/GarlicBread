@@ -1,23 +1,23 @@
-# Garlic Bread
+<div align="center">
+  <div>&nbsp;</div>
+  <img src="assets/garlic-bread-logo.png" width="400"/> 
+</div>
 
-[![Twitter Handle][]][twitter badge]
+## Introduction
 
-<img align="right" src="assets/logo.png" height="150px" alt="TBA">
+Garlic Bread is a _fun_, _simple_ and _useful_ bot written using `Discord.JS`. It has some features that I needed for my guild. This bot is designed for casual, simple guilds.
 
-**Garlic Bread** is a _fun_, _simple_ and _useful_ bot written
-using **Discord.JS**. It has some features that I needed for my guild. This bot is designed for casual, simple guilds.
+## Features
 
-### Features
-
-- Customizable roles
-- Dice rolling
-- Random Kanye quotes
-- Moderation tools
-- Remote maintenance
+1. Customizable roles
+2. Dice rolling
+3. Random Kanye quotes
+4. Moderation tools
+5. Remote maintenance
 
 ... and more useful tools like 'userinfo' and 'avatar'.
 
-### Getting Started
+## Getting Started
 
 1. Clone the repo:
 
@@ -43,21 +43,14 @@ DATABASE_URL="file:./dev.db"
 4. Build the source code:
 
 ```sh
-pnpm build
+npm build
 ```
 
 5. Run the following command and enjoy!
 
 ```sh
-pnpm start
+npm start
 ```
 
-### Contributing
-
-We appreciate your help!
-
-To contribute, please read our
-[contributing instructions](https://github.com/VladCuciureanu/GarlicBread/blob/main/CONTRIBUTING.md).
-
-[twitter badge]: https://twitter.com/intent/follow?screen_name=VladCuciureanu_
-[twitter handle]: https://img.shields.io/twitter/follow/VladCuciureanu_.svg?style=social&label=Follow
+## License
+GarlicBread is distributed under the terms of the MIT License. Free for both commercial and research use.
