@@ -1,9 +1,4 @@
-<div align="center">
-  <div>&nbsp;</div>
-  <img src="assets/garlic-bread-logo.png" width="400"/> 
-</div>
-
-## Introduction
+# 🧄🥖 Garlic Bread
 
 Garlic Bread is a _fun_, _simple_ and _useful_ bot written using `Discord.JS`. It has some features that I needed for my guild. This bot is designed for casual, simple guilds.
 
